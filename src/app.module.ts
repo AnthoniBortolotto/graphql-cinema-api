@@ -4,6 +4,8 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './database/configs/typeorm.config.js';
 import { MoviesResolver } from './movies/resolver/movies.resolver';
+import { MoviesService } from './movies/services/movies.service.js';
+import { Movie } from './database/entities/movie.entity.js';
 
 @Module({
   imports: [
@@ -12,8 +14,8 @@ import { MoviesResolver } from './movies/resolver/movies.resolver';
       autoSchemaFile: true,
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
+    TypeOrmModule.forFeature([Movie]),
   ],
-  controllers: [],
-  providers: [MoviesResolver],
+  providers: [MoviesResolver, MoviesService],
 })
 export class AppModule {}

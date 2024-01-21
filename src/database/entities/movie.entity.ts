@@ -11,13 +11,13 @@ import { Section } from './section.entity';
 @Entity()
 export class Movie {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
   @Column({ type: 'varchar', length: 500, nullable: false })
   title: string;
   @Column({ type: 'varchar', length: 1000, nullable: false })
   description: string;
   @OneToMany(() => Section, (section) => section.id)
-  section: Section;
+  section: Section[];
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()
