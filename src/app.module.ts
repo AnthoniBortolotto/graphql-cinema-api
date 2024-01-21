@@ -3,9 +3,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './database/configs/typeorm.config.js';
-import { MoviesResolver } from './movies/resolver/movies.resolver';
-import { MoviesService } from './movies/services/movies.service.js';
-import { Movie } from './database/entities/movie.entity.js';
+import { MoviesModule } from './movies/modules/movies.module.js';
 
 @Module({
   imports: [
@@ -14,8 +12,7 @@ import { Movie } from './database/entities/movie.entity.js';
       autoSchemaFile: true,
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
-    TypeOrmModule.forFeature([Movie]),
+    MoviesModule,
   ],
-  providers: [MoviesResolver, MoviesService],
 })
 export class AppModule {}
